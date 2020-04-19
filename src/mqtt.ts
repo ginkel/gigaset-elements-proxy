@@ -103,6 +103,8 @@ export function sendActualStates() {
             let base: gigasetBasestations.IRootObjectItem = JSON.parse(body)[0]
             console.log(`sending actual alarm mode: ${base.friendly_name} | ${base.intrusion_settings.active_mode}`)
             mqttClient.publish(`gigaset/${base.friendly_name}`, base.intrusion_settings.active_mode)
+            console.log(`sending actual intrusion_mode mode: intrusion_mode | ${base.intrusion_settings.active_mode}`)
+            mqttClient.publish('gigaset/intrusion_mode', base.intrusion_settings.active_mode)
 
         } catch (e) { handleGigasetError('sensor actual status', e, body) }
     })
